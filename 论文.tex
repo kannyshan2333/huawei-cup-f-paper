@@ -1,0 +1,47 @@
+% !TEX program = xelatex
+% 第23届“华为杯”中国研究生数学建模竞赛
+% 封面图片位于同一主文件条目的 figures/ 中；装配时该目录会与论文.tex 同级复制。
+\PassOptionsToPackage{quiet}{xeCJK}
+\documentclass[withoutpreface,bwprint]{format}
+
+\title{算力约束下提升大语言模型能力的资源配置建模}
+
+% 此入口只提供华为杯封面和题目页，不内置外部模板的摘要正文。
+% 摘要仍使用系统 00.摘要 章节；本赛默认变体是「研赛摘要（默认）」（隶书标题），
+% 由 system/format-defaults.json 的赛名覆盖指定，装配时自动选中。
+% 摘要结束后插入目录，再进入其余正文。
+\AfterEndEnvironment{abstract}{%
+  \pagestyle{plain}%
+  \tableofcontents
+  \thispagestyle{plain}%
+  \clearpage
+}
+
+\begin{document}
+
+% 下列信息由软件“队伍信息”自动填充。
+\tihao{}
+\baominghao{}
+\group{}
+\schoolname{}
+\membera{}
+\memberb{}
+\memberc{}
+\supervisor{}
+
+% 图片封面 + 独立题目页；摘要和正文继续沿用系统现有内容与 format.cls。
+\mriteHuaweiCover{figures/logo.pdf}{figures/title.pdf}
+
+\input{0.摘要.tex}
+\input{1.引言.tex}
+\input{2.总体分析.tex}
+\input{3.模型假设.tex}
+\input{4.符号说明.tex}
+\input{5.模型的建立与求解.tex}
+\input{6.模型检验.tex}
+\input{7.模型评价.tex}
+\input{8.模型改进推广.tex}
+\input{10.参考文献.tex}
+\input{11.附录.tex}
+
+\end{document}

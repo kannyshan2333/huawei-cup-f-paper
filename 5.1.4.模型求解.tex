@@ -1,0 +1,53 @@
+
+% ════════════════════════════════════════════
+% 模型求解（5.X.4.模型求解.tex）写作规则 —— 模板内嵌，AI 先读本文件再写
+% ════════════════════════════════════════════
+% 【定位】本块为每个问题的「模型求解」（三级子块），放在模型建立之后，用于展示求解结果并分析。
+% 【结构】开头段引文 → 结果表/图 → 分析文字。
+% 【开头段】引文，表达求解已完成，引出下面的结果表、图；说明求解环境与核心参数。
+% 【图、表宽度】\includegraphics 宽度设为正文的 0.8【如 width=0.8\textwidth】；表格总列宽=1.04-0.04*N。
+% 【图、表规范】图字务必清晰，全部为中文；图和表必须被引用，如「如图\ref{fig:xxx}所示」「如表\ref{tab:xxx}所示」。
+% 【结果展示】文字引入 + 表/图展示 + 分析文字，三段式，不要分点、不要任何加粗。
+% 【数值型结果】必须用单独表格重点突出表示；非数值结果、预测趋势线、对比效果用醒目的图表示。
+% 【禁止】不要出现看起来高大上但莫名其妙的图；图必须与结果分析直接相关。
+% ════════════════════════════════════════════
+\subsubsection{模型求解}
+
+% 引文
+基于上述模型，本节利用...数据进行求解。求解环境为...，核心参数如表\ref{tab:参数1}所示。
+
+% 结果表格
+求解得到以下结果：
+
+\begin{longtable}{>{\centering\arraybackslash}p{0.22\textwidth}>{\centering\arraybackslash}p{0.22\textwidth}>{\centering\arraybackslash}p{0.22\textwidth}>{\centering\arraybackslash}p{0.22\textwidth}}
+  \caption{...结果}
+  \label{tab:结果1} \\
+  \toprule
+  指标1 & 指标2 & 指标3 & 指标4 \\
+  \midrule
+  \endfirsthead
+  \caption{...结果（续）} \\
+  \toprule
+  指标1 & 指标2 & 指标3 & 指标4 \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  ... & ... & ... & ... \\
+\end{longtable}
+
+% 结果图
+如图\ref{fig:xxx}所示，...（一句话点出图的结论）。
+
+% 图引用示例：放宽 \includegraphics[width=]，按图片宽高比档位定宽度
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{求解/问题一/figures/xxx.png}
+%   \caption{...}
+%   \label{fig:xxx}
+% \end{figure}
+% 宽高比(高/宽)档位：≥0.9 竖图用 0.55~0.65\textwidth；0.6~0.9 用 0.60~0.70；<0.6 宽幅用 0.65~0.75；同 figure 并排两张各 0.45~0.50。
+
+% 结果分析
+由表\ref{tab:结果1}可知，...。从图\ref{fig:xxx}可以看出，...。
+综合以上结果，...（一段分析总结）。

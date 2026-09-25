@@ -1,0 +1,147 @@
+% ════════════════════════════════════════════
+% 附录（11.附录.tex）写作规则 —— 模板内嵌，AI 先读本文件再写
+% ════════════════════════════════════════════
+\newpage
+\makeatletter
+\let\@oldaddcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{}
+
+\section*{附录}
+\let\addcontentsline\@oldaddcontentsline
+\makeatother
+
+\renewcommand{\arraystretch}{1.2}
+
+\subsection*{附录 A：数据利用清单}
+
+按数据说明的要求，列出本文对各附件的实际使用情况，并标注半合成/外推数据的可信度边界，如表\ref{tab:appendix}所示。
+
+\begin{longtable}{>{\centering\arraybackslash}p{0.06\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\centering\arraybackslash}p{0.08\textwidth}>{\centering\arraybackslash}p{0.08\textwidth}>{\raggedright\arraybackslash}p{0.43\textwidth}}
+  \caption{附件数据利用清单}
+  \label{tab:appendix} \\
+  \toprule
+  编号 & 文件名 & 性质 & 是否使用 & 使用方式与可信度说明 \\
+  \midrule
+  \endfirsthead
+  \caption{附件数据利用清单（续）} \\
+  \toprule
+  编号 & 文件名 & 性质 & 是否使用 & 使用方式与可信度说明 \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  A1 & slimpajama\_quality\_signal\_sample & 真实 & 使用 & 22 指标熵权评分、冲突分析、域级 $Q$、原文抽查（51{,}230 条全量） \\
+  A2 & slimpajama\_quality\_extended/arxiv & 真实 & 使用 & 扩展集域级 $Q$ 与抽样集对照（17{,}523 条全量） \\
+  A3 & slimpajama\_quality\_extended/github & 真实 & 使用 & 扩展集域级 $Q$ 与抽样集对照（203{,}752 条全量） \\
+  A4 & train\_mixture\_1m & 真实 & 使用 & 配比—损失岭回归训练集（512 组） \\
+  A5 & train\_pile\_loss\_1m & 真实 & 使用 & 13 域损失标签 \\
+  A6--A9 & test\_mixture/loss\_1m, 60m & 真实 & 使用 & 同尺度与跨尺度检验（各 256 组） \\
+  A10--A11 & test\_mixture/loss\_1B & 真实 & 使用 & 跨尺度检验（64 组） \\
+  A12--A15 & est\_mixture/loss\_10b, 70b & 子集/外推 & 使用 & 外推尺度因子稳健性（各 63 组，均标注为外推非观测） \\
+  A16 & domain\_mapping\_guide & 参考 & 使用 & 17 域到质量域跨体系映射（6 域 direct/near\_direct，11 域 inferred 用全局均值并标明） \\
+  A17 & regmix\_domain\_summary & 真实 & 未使用 & 版内未接入，供扩展分析 \\
+  A18 & regmix\_domain\_sample & 真实 & 未使用 & 可选辅助，未接入 \\
+  B1 & pythia\_training\_log\_existing & 真实 & 使用 & 经典标度律主拟合与模型留出验证（1{,}176 点）；已说明该附件近乎无观测噪声 \\
+  B2 & cerebras\_training\_log & 半合成 & 使用 & 族外验证；结果 MAPE 33.7\%，判为口径差异、仅作定性参考 \\
+  B3 & training\_trajectories & 插值 & 使用 & 轨迹内 $D$ 幂指数验证（$-0.2806$ 至 $-0.2803$，拟合值 $-0.2799$） \\
+  B4 & scaling\_baseline & 真实 & 使用 & 跨族验证（$r=0.975$、MAPE 8.8\%） \\
+  B5 & published\_scaling\_data & 真实 & 使用 & 文献验证（$r=0.910$、MAPE 8.0\%） \\
+  B6 & supplementary\_NQ\_experiment & 半合成 & 使用 & 质量缺口项拟合主数据（360 点）；仅用于标定质量效应，不作直接实验观测 \\
+  B7 & supplementary\_NQ\_experiment\_expanded & 半合成 & 使用 & 新增点独立验证（$r=0.991$） \\
+  B8 & supplementary\_NQ\_experiment\_large & 半合成 & 部分使用 & 方向审计发现其 $Q_{\text{score}}$ 与 B6/B7 反号，且最小损失低于不可约损失下限，故不并入拟合，仅作可信度边界警示 \\
+  B9 & supplementary\_large\_models & 真实 & 使用 & 百亿参数以上模型元数据（参数量、数据量、开源可及性） \\
+  B10 & supplementary\_large\_baseline & 估算 & 使用 & 百亿参数以上外推检验（$r\approx1.000$、MAPE 1.0\%）；标注为估算值 \\
+  B11 & open\_model\_family\_metadata & 真实 & 未使用 & 辅助文件，版内未接入 \\
+  B12 & pythia\_checkpoint\_index & 真实 & 未使用 & 辅助文件，版内未接入 \\
+  C1 & leaderboard\_cleaned & 真实 & 使用 & 六维得分、许可、类型、提交日期；开源筛选后 2{,}346 条用于面板回归与前沿 \\
+  C2 & leaderboard\_enhanced & 真实 & 未使用 & C1 的增强替代版，为避免重复计算未使用 \\
+  C3 & leaderboard\_extended\_timeseries & 混合 & 使用 & 2019--2025 长周期分解；已剔除 13 条自洽性异常行，口径混合性在正文标注 \\
+  C4 & epoch\_all\_ai\_models & 真实 & 使用 & 训练算力年增速（$+0.589$ dex/年）、训练数据量、开源权重字段（Yes 1{,}325 / No 1{,}328） \\
+  C5 & loss\_benchmark\_bridge & 混合 & 使用 & 桥接对照（$n=43$，$r=-0.502$） \\
+  C6 & loss\_benchmark\_bridge\_expanded & 混合 & 使用 & 桥接主用（$n=75$），按 High/Medium 可比性分层使用 \\
+  C7 & model\_architecture\_metadata & 真实 & 使用 & 上下文长度可行取值（2048、4096、8192、32768、131072）用于问题三敏感性分析 \\
+  C8 & detailed\_results/ & 真实 & 使用 & 逐任务聚合（1{,}860 个模型成功解析、37 个子任务维度），并与 C1 做秩相关校验 \\
+  C9 & data/（Parquet） & 真实 & 未使用 & 与 C1 等价，任选其一 \\
+  C10 & pythia\_eval\_details/ & 说明 & 未使用 & 仅含 README，不可替代 C8 \\
+\end{longtable}
+
+\subsection*{附录 B：半合成与外推数据的标注}
+
+按数据说明要求，以下数据为非直接观测，正文中的相关结论均已限定适用范围：
+
+\begin{itemize}[itemindent=2em]
+\item \textbf{半合成数据}：B2（Cerebras 训练日志）、B6/B7/B8（NQ 质量实验）。本文在标度律拟合中仅使用 B6（主）与 B7（验证），并在 5.2 节以表格明确其“半合成”性质；B2、B8 经自洽性审计后不并入拟合。
+\item \textbf{外推与估算数据}：A12--A15（10B/70B 损失外推，源自 1M/60M/1B 幂律外推）、B10（百亿参数以上损失估算）。相关结论仅用于稳健性检验，未作为观测证据。
+\item \textbf{插值数据}：B3（Pythia 插值轨迹），仅用于轨迹内幂指数的交叉验证。
+\item \textbf{混合口径数据}：C3（跨年评测标准不完全一致）、C5/C6（Loss 来源与验证集不完全统一）。前者的异常行已被审计剔除，后者已按可比性等级分层使用。
+\end{itemize}
+
+\subsection*{附录 C：结果文件与核心求解代码}
+
+本文的求解结果以 CSV 形式保存在 求解/问题一至问题四/结果/ 目录下，主要结果文件如表\ref{tab:appendix2}所示（表中文件名省略“求解/问题X/结果/”前缀）。
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}}
+  \caption{主要结果文件说明}
+  \label{tab:appendix2} \\
+  \toprule
+  文件 & 说明 \\
+  \midrule
+  \endfirsthead
+  \caption{主要结果文件说明（续）} \\
+  \toprule
+  文件 & 说明 \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  质量指标熵权.csv & 22 指标的方向判定、语义说明、信息熵与熵权 \\
+  质量信号缺失审计.csv & 逐指标字段级缺失计数（A1--A3 全量） \\
+  质量冲突与一致性.csv & 抽样集/扩展集/全量的冲突率、独立基准与 Kendall $W$ \\
+  冲突阈值灵敏度.csv & 冲突率随阈值 $\tau$ 的变化 \\
+  抽样集与扩展集域级对照.csv & A1 与 A2/A3 的域级质量对照 \\
+  质量与损失难度一致性.csv & 两套质量口径在 6 个映射域上的排序比较 \\
+  质量项增量检验.csv & 追加混合质量指数后的 $R^2$ 增量 \\
+  混合系数矩阵.csv、截距.csv & 配比—损失岭回归系数与截距 \\
+  推荐配比调整.csv & 有界推荐配比与调整量 \\
+  问题一\_拟合汇总.csv & 各损失域的拟合与检验指标 \\
+  岭正则敏感性.csv & 正则系数灵敏度 \\
+  经典标度律参数.csv & 经典标度律参数、拟合与留出验证指标 \\
+  质量字段方向审计.csv & B6/B7/B8 的组内相关与方向结论 \\
+  广义标度律形式对比.csv & 四种质量项形式的 $R^2$/AIC 比较 \\
+  广义标度律分层验证.csv & 6 个独立来源的验证结果 \\
+  弹性与替代关系.csv、质量参数替代关系.csv & 弹性与替代率 \\
+  领域替代互补\_top.csv & 领域间替代/互补结构 \\
+  B3轨迹验证.csv & 轨迹内 $D$ 幂指数验证 \\
+  三档预算最优配置.csv、成本函数对比.csv & 三档预算与三型成本函数的优化结果 \\
+  结构性转移识别.csv & 结构性转移门槛 \\
+  上下文长度敏感性.csv & C7 五档上下文长度下的最优配置 \\
+  质量基线灵敏度.csv & 质量基线口径灵敏度 \\
+  配比项算力等价.csv & 配比优化的算力等价效果 \\
+  筛选漏斗.csv & 时间轴/开源/模型类型三套口径的筛选漏斗 \\
+  C8逐任务解析结果.csv & C8 全部模型的任务级原始指标 \\
+  C8逐任务聚合.csv、C8子任务类别汇总.csv & 子任务前沿与剩余空间 \\
+  C8与C1一致性校验.csv & C8 与 C1 的秩相关校验 \\
+  Loss\_Benchmark映射.csv & 分层桥接拟合结果 \\
+  规模时间分解.csv、规模时间分解\_长周期.csv & 规模/非规模贡献分解 \\
+  C3口径异常行.csv & C3 自洽性审计剔除的记录 \\
+  前沿预测.csv、前沿预测\_结构外推情景.csv & 能力前沿预测与情景 \\
+  C4宏观趋势.csv、C4宏观摘要.csv & C4 宏观算力与开源权重证据 \\
+  求解/广义标度律参数.csv、问题一\_关键量.json & 跨问共享的接口参数 \\
+\end{longtable}
+
+\newpage
+\subsection*{核心求解代码}
+
+本附录列出四个问题的核心求解代码，代码文件位于求解目录下对应的问题一至问题四子目录中，共享工具函数位于 求解/\_common.py。
+
+\subsubsection*{问题一：质量评价、冲突消解与配比建模（问题一.py）}
+\lstinputlisting[language=Python, caption={问题一求解代码（质量综合评价、冲突消解与岭正则配比建模）}, label={code:p1}]{求解/问题一/问题一.py}
+
+\subsubsection*{问题二：广义标度律（问题二.py）}
+\lstinputlisting[language=Python, caption={问题二求解代码（经典与广义标度律拟合、方向审计、弹性与质量—参数替代分析）}, label={code:p2}]{求解/问题二/问题二.py}
+
+\subsubsection*{问题三：算力约束联合优化（问题三.py）}
+\lstinputlisting[language=Python, caption={问题三求解代码（赛题成本模型、临界上下文长度、预算约束联合优化与结构性转移识别）}, label={code:p3}]{求解/问题三/问题三.py}
+
+\subsubsection*{问题四：技术演进与前沿预测（问题四.py）}
+\lstinputlisting[language=Python, caption={问题四求解代码（口径筛选、C8 逐任务聚合、Loss 桥接、规模/时间分解与能力前沿外推）}, label={code:p4}]{求解/问题四/问题四.py}

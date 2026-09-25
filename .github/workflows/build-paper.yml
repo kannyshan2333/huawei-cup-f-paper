@@ -1,0 +1,23 @@
+name: 编译论文
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+      - name: 使用 XeLaTeX 编译
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: 论文.tex
+          latexmk_use_xelatex: true
+      - name: 保存 PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: 论文-PDF
+          path: 论文.pdf

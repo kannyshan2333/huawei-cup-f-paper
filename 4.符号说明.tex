@@ -1,0 +1,53 @@
+% ════════════════════════════════════════════
+% 符号说明（4.符号说明.tex）写作规则 —— 模板内嵌，AI 先读本文件再写
+% ════════════════════════════════════════════
+\section{符号说明}
+
+本文使用的主要符号及其含义如表\ref{tab:符号说明}所示。
+
+% longtable：可跨页，>{\centering\arraybackslash}p{} 居中，比例按内容调整
+\begin{longtable}{>{\centering\arraybackslash}p{0.20\textwidth}>{\centering\arraybackslash}p{0.76\textwidth}}
+  \caption{符号说明}
+  \label{tab:符号说明} \\
+  \toprule
+  符号 & 说明 \\
+  \midrule
+  \endfirsthead
+  \caption{符号说明（续）} \\
+  \toprule
+  符号 & 说明 \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  $N$ & 模型参数量（单位：B，十亿参数） \\
+  $D$ & 训练数据规模（单位：B tokens） \\
+  $L$ & 验证交叉熵损失（越低越好） \\
+  $Q$ & 数据质量评分（$Q\in[0,1]$，越高越好） \\
+  $Q_0$ & 基线数据质量（参考语料配比加权平均，$Q_0=0.5510$） \\
+  $\bm p$ & 17 个训练领域的配比向量（分量非负且和为 1） \\
+  $E$ & 不可约损失（$N,D\to\infty$ 且 $Q=1$ 时的极限损失） \\
+  $A,B$ & 标度律中规模项与数据项的系数 \\
+  $\alpha,\beta$ & 标度律中规模项与数据项的指数 \\
+  $C,\gamma$ & 广义标度律中质量缺口项的系数与指数 \\
+  $\varepsilon_N,\varepsilon_D,\varepsilon_Q$ & 损失对参数量、数据量、质量的弹性 \\
+  $M(\bm p)$ & 配比项对损失的平移修正（相对参考配比） \\
+  $C_{\text{train}},C_Q,C_{\text{attn}}$ & 基础训练、质量提升、长文本注意力三类算力开销 \\
+  $C_{\text{budget}}$ & 算力预算（单位：FLOPs） \\
+  $g(Q)$ & 数据质量成本函数（指数型/幂函数型/对数渐进型） \\
+  $\eta$ & 长文本注意力的算力系数（$\eta=2\times10^{-4}$） \\
+  $\lambda(L_{\text{ctx}})$ & 注意力开销相对训练开销的倍数 $\eta L_{\text{ctx}}/6$ \\
+  $L_{\text{crit}}$ & 注意力开销等于训练开销的临界上下文长度（$L_{\text{crit}}=6/\eta=30{,}000$） \\
+  $\tau(Q)$ & 质量投入的等效附加数据量（k tokens） \\
+  $\Theta(C),e_\Theta$ & 质量提升完成度及其对预算的弹性（结构性转移识别量） \\
+  $F(t)$ & 时刻 $t$ 的模型能力前沿（Leaderboard 六维均分） \\
+  $K,r,t_0$ & logistic 饱和外推的饱和上界、增长率与拐点 \\
+  $b_P,b_t$ & 面板回归中的规模系数（分/10 倍参数）与时间系数（分/年） \\
+  $\alpha_t$ & 面板回归的年份固定效应（非规模技术进步） \\
+  $\bar B$ & Leaderboard 六维平均得分 \\
+  $w_j,e_j$ & 第 $j$ 个质量指标的熵权与信息熵 \\
+  $W$ & Kendall 协同系数（指标一致性度量） \\
+  $\rho_c,\rho_0$ & 冲突率与指标独立时的冲突基准 \\
+  $R^2$ & 决定系数 \\
+  RMSE / MAE / MAPE & 均方根误差 / 平均绝对误差 / 平均绝对百分比误差 \\
+\end{longtable}
